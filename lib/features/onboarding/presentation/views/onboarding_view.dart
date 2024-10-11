@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:animation/features/onboarding/presentation/views/widgets/animation_button.dart';
+import 'package:animation/features/onboarding/presentation/views/widgets/sign_in_form.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart' as rive;
 
@@ -79,6 +80,43 @@ class _OnboardingViewState extends State<OnboardingView> {
                         AnimationButton(
                           onPressed: () {
                             _btnanimationController.isActive = true;
+                            showGeneralDialog(
+                                barrierDismissible: true,
+                                barrierLabel: "Sign In",
+                                context: context,
+                                pageBuilder: (context, _, __) => Center(
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                .750,
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 32, horizontal: 24),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(40))),
+                                        child: Scaffold(
+                                          backgroundColor: Colors.transparent,
+                                          body: Column(
+                                            children: [
+                                              Text(
+                                                "Sign In",
+                                                style: TextStyle(
+                                                    fontSize: 34,
+                                                    fontFamily: "Poppins"),
+                                              ),
+                                              Text(
+                                                "Access to 240+ hours of content, Learn desihn and code , by building real apps with flutter",
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              const SignInForm()
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ));
                           },
                           btnAnimationController: _btnanimationController,
                         ),
@@ -100,3 +138,4 @@ class _OnboardingViewState extends State<OnboardingView> {
     );
   }
 }
+
