@@ -23,11 +23,6 @@ class _OnboardingViewState extends State<OnboardingView> {
     );
   }
 
-  void _onButtonPressed() {
-    setState(() {
-      _btnanimationController.isActive = true;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

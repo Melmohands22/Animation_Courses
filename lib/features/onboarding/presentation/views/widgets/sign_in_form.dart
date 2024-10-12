@@ -1,3 +1,6 @@
+import 'package:animation/features/onboarding/presentation/views/widgets/custom_divider.dart';
+import 'package:animation/features/onboarding/presentation/views/widgets/custom_sign_up.dart';
+import 'package:animation/features/onboarding/presentation/views/widgets/sign_up_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -35,6 +38,32 @@ class _SignInFormState extends State<SignInForm> {
     return controller!;
   }
 
+  void SignIn(BuildContext context) {
+    setState(() {
+      isShowLoading = true;
+      isShowConfetti = true;
+    });
+    Future.delayed(const Duration(seconds: 1), () {
+      if (_formKey.currentState!.validate()) {
+        check.fire();
+        Future.delayed(const Duration(seconds: 2), () {
+          setState(() {
+            isShowLoading = false;
+          });
+
+          confetti.fire();
+        });
+      } else {
+        error.fire();
+        Future.delayed(const Duration(seconds: 2), () {
+          setState(() {
+            isShowLoading = false;
+          });
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -51,161 +80,16 @@ class _SignInFormState extends State<SignInForm> {
                   "Email",
                   style: TextStyle(color: Colors.black54),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom: 16),
-                  child: TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "";
-                      }
-                      return null;
-                    },
-                    onSaved: (email) {},
-                    decoration: InputDecoration(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: SvgPicture.asset("assets/icons/email.svg"),
-                      ),
-                      border: OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                    ),
-                  ),
-                ),
+                CustomEmailTextField(),
                 Text(
                   "Password",
                   style: TextStyle(color: Colors.black54),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom: 16),
-                  child: TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "";
-                      }
-                      return null;
-                    },
-                    onSaved: (password) {},
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: SvgPicture.asset("assets/icons/password.svg"),
-                      ),
-                      border: OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 20),
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      setState(() {
-                        isShowLoading = true;
-                        isShowConfetti = true;
-                      });
-                      Future.delayed(const Duration(seconds: 1), () {
-                        if (_formKey.currentState!.validate()) {
-                          check.fire();
-                          Future.delayed(const Duration(seconds: 2), () {
-                            setState(() {
-                              isShowLoading = false;
-                            });
-
-                            confetti.fire();
-                          });
-                        } else {
-                          error.fire();
-                          Future.delayed(const Duration(seconds: 2), () {
-                            setState(() {
-                              isShowLoading = false;
-                            });
-                          });
-                        }
-                      });
-                    },
-                    icon: Icon(
-                      CupertinoIcons.arrow_right,
-                      color: Color(0xfffe0037),
-                    ),
-                    label: Text(
-                      "Sign In",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xfff77d8e),
-                        minimumSize: const Size(double.infinity, 56),
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomLeft: Radius.circular(25),
-                          bottomRight: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                        ))),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Divider(),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        "OR",
-                        style: TextStyle(color: Colors.black26),
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(),
-                    ),
-                  ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Center(
-                    child: Text(
-                      "Sign up with Email , Apple or Google",
-                      style: TextStyle(color: Colors.black54),
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {},
-                        icon: SvgPicture.asset(
-                          "assets/icons/email_box.svg",
-                          height: 62,
-                          width: 62,
-                        )),
-                    IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {},
-                        icon: SvgPicture.asset(
-                          "assets/icons/apple_box.svg",
-                          height: 62,
-                          width: 62,
-                        )),
-                    IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {},
-                        icon: SvgPicture.asset(
-                          "assets/icons/google_box.svg",
-                          height: 62,
-                          width: 62,
-                        )),
-                  ],
-                )
+                CustomPassTextField(),
+                CustomButton(context),
+                CustomDivider(),
+                SignUpText(),
+                CustomSignUp()
               ],
             )),
         isShowLoading
@@ -241,7 +125,106 @@ class _SignInFormState extends State<SignInForm> {
       ],
     );
   }
+
+  Padding  CustomButton(BuildContext context) {
+    return Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 20),
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    SignIn(context);
+                  },
+                  icon: Icon(
+                    CupertinoIcons.arrow_right,
+                    color: Color(0xfffe0037),
+                  ),
+                  label: Text(
+                    "Sign In",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xfff77d8e),
+                      minimumSize: const Size(double.infinity, 56),
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(25),
+                        bottomRight: Radius.circular(25),
+                        topRight: Radius.circular(25),
+                      ))),
+                ),
+              );
+  }
 }
+
+class CustomPassTextField extends StatelessWidget {
+  const CustomPassTextField({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, bottom: 16),
+      child: TextFormField(
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "";
+          }
+          return null;
+        },
+        onSaved: (password) {},
+        obscureText: true,
+        decoration: InputDecoration(
+          prefixIcon: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: SvgPicture.asset("assets/icons/password.svg"),
+          ),
+          border: OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomEmailTextField extends StatelessWidget {
+  const CustomEmailTextField({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, bottom: 16),
+      child: TextFormField(
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "";
+          }
+          return null;
+        },
+        onSaved: (email) {},
+        decoration: InputDecoration(
+          prefixIcon: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: SvgPicture.asset("assets/icons/email.svg"),
+          ),
+          border: OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
 
 class CustomPositioned extends StatelessWidget {
   const CustomPositioned({super.key, required this.child, this.size = 100});
