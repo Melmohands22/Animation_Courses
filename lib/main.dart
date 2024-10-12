@@ -1,3 +1,4 @@
+import 'package:animation/features/home/presentation/views/widgets/entry_point.dart';
 import 'package:animation/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      routes:
+     {
+       EntryPoint.id: (context)=>EntryPoint(),
+     }
+      ,
       home: OnboardingView(),
     );
   }

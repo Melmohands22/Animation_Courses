@@ -1,6 +1,7 @@
-import 'dart:ui';
 import 'package:animation/features/onboarding/presentation/views/widgets/animation_button.dart';
+import 'package:animation/features/onboarding/presentation/views/widgets/background_section.dart';
 import 'package:animation/features/onboarding/presentation/views/widgets/custom_show_dailog.dart';
+import 'package:animation/features/onboarding/presentation/views/widgets/higher_section.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart' as rive;
 
@@ -23,30 +24,18 @@ class _OnboardingViewState extends State<OnboardingView> {
     );
   }
 
+  void _onButtonPressed() {
+    setState(() {
+      _btnanimationController.isActive = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            width: MediaQuery.of(context).size.width * 1.7,
-            bottom: 200,
-            left: 100,
-            child: Image.asset('assets/Backgrounds/Spline.png'),
-          ),
-          Positioned.fill(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 10),
-            ),
-          ),
-          const rive.RiveAnimation.asset('assets/RiveAssets/shapes.riv'),
-          Positioned.fill(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 10),
-              child: const SizedBox(),
-            ),
-          ),
+          const BackgroundSection(),
           AnimatedPositioned(
             top: isSignInDialogShown ? -50 : 0,
             duration: Duration(milliseconds: 240),
@@ -65,17 +54,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                       width: 260,
                       child: Column(
                         children: [
-                          const Text(
-                            'Practice Design & Code',
-                            style: TextStyle(
-                                fontFamily: "Poppins",
-                                fontSize: 60,
-                                height: 1.2),
-                          ),
-                          const SizedBox(height: 16),
-                          const Text(
-                            "I'm trying to create an awesome UI apps using my knowledge in Flutter in this app which presents a group of courses ",
-                          ),
+                          HigherSection(),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .2,
                           ),

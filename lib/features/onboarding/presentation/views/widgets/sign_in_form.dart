@@ -1,3 +1,5 @@
+import 'package:animation/core/utilis/rive_utils.dart';
+import 'package:animation/features/home/presentation/views/widgets/entry_point.dart';
 import 'package:animation/features/onboarding/presentation/views/widgets/custom_divider.dart';
 import 'package:animation/features/onboarding/presentation/views/widgets/custom_sign_up.dart';
 import 'package:animation/features/onboarding/presentation/views/widgets/sign_up_text.dart';
@@ -25,19 +27,6 @@ class _SignInFormState extends State<SignInForm> {
   late SMITrigger error;
   late SMITrigger confetti;
 
-  rive.StateMachineController getRiveController(Artboard artboard) {
-    StateMachineController? controller =
-        StateMachineController.fromArtboard(artboard, "State Machine 1");
-
-    if (controller != null) {
-      artboard.addController(controller);
-    } else {
-      debugPrint("State Machine Controller not found");
-    }
-
-    return controller!;
-  }
-
   void SignIn(BuildContext context) {
     setState(() {
       isShowLoading = true;
@@ -52,6 +41,11 @@ class _SignInFormState extends State<SignInForm> {
           });
 
           confetti.fire();
+          Future.delayed(Duration(seconds: 1), () {
+            setState(() {
+              Navigator.pushNamed(context, EntryPoint.id);
+            });
+          });
         });
       } else {
         error.fire();
@@ -98,7 +92,7 @@ class _SignInFormState extends State<SignInForm> {
                   'assets/RiveAssets/check.riv',
                   onInit: (artboard) {
                     StateMachineController controller =
-                        getRiveController(artboard);
+                        RiveUtils.getRiveController(artboard);
                     check = controller.findSMI("Check") as SMITrigger;
                     error = controller.findSMI("Error") as SMITrigger;
                     reset = controller.findSMI("Reset") as SMITrigger;
@@ -114,7 +108,7 @@ class _SignInFormState extends State<SignInForm> {
                     "assets/RiveAssets/confetti.riv",
                     onInit: (artboard) {
                       StateMachineController controller =
-                          getRiveController(artboard);
+                          RiveUtils.getRiveController(artboard);
                       confetti =
                           controller.findSMI("Trigger explosion") as SMITrigger;
                     },
@@ -126,33 +120,33 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 
-  Padding  CustomButton(BuildContext context) {
+  Padding CustomButton(BuildContext context) {
     return Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 20),
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    SignIn(context);
-                  },
-                  icon: Icon(
-                    CupertinoIcons.arrow_right,
-                    color: Color(0xfffe0037),
-                  ),
-                  label: Text(
-                    "Sign In",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xfff77d8e),
-                      minimumSize: const Size(double.infinity, 56),
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        bottomLeft: Radius.circular(25),
-                        bottomRight: Radius.circular(25),
-                        topRight: Radius.circular(25),
-                      ))),
-                ),
-              );
+      padding: const EdgeInsets.only(top: 10, bottom: 20),
+      child: ElevatedButton.icon(
+        onPressed: () {
+          SignIn(context);
+        },
+        icon: Icon(
+          CupertinoIcons.arrow_right,
+          color: Color(0xfffe0037),
+        ),
+        label: Text(
+          "Sign In",
+          style: TextStyle(color: Colors.white),
+        ),
+        style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xfff77d8e),
+            minimumSize: const Size(double.infinity, 56),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              bottomLeft: Radius.circular(25),
+              bottomRight: Radius.circular(25),
+              topRight: Radius.circular(25),
+            ))),
+      ),
+    );
   }
 }
 
@@ -222,9 +216,6 @@ class CustomEmailTextField extends StatelessWidget {
     );
   }
 }
-
-
-
 
 class CustomPositioned extends StatelessWidget {
   const CustomPositioned({super.key, required this.child, this.size = 100});
