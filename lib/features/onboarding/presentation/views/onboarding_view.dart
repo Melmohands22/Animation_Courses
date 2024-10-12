@@ -13,7 +13,7 @@ class OnboardingView extends StatefulWidget {
 
 class _OnboardingViewState extends State<OnboardingView> {
   late rive.RiveAnimationController _btnanimationController;
-
+  bool isSignInDialogShown = false;
   @override
   void initState() {
     super.initState();
@@ -52,50 +52,65 @@ class _OnboardingViewState extends State<OnboardingView> {
               child: const SizedBox(),
             ),
           ),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * .0999,
-                  ),
-                  SizedBox(
-                    width: 260,
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Practice Design & Code',
-                          style: TextStyle(
-                              fontFamily: "Poppins", fontSize: 60, height: 1.2),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          "I'm trying to create an awesome UI apps using my knowledge in Flutter in this app which presents a group of courses ",
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * .2,
-                        ),
-                        AnimationButton(
-                          btnAnimationController: _btnanimationController,
-                          onPressed: () {
-                            _btnanimationController.isActive = true;
-                            Future.delayed(Duration(milliseconds: 800), () {
-                              CustomShowDialog(context);
-                            });
-                          },
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 24),
-                          child: Text(
-                            "Purchase includes access to 20+ courses, 240+ premium tutorials, 120 hours of videos, source files and certificates",
-                          ),
-                        ),
-                      ],
+          AnimatedPositioned(
+            top: isSignInDialogShown ? -50 : 0,
+            duration: Duration(milliseconds: 240),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .0999,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 260,
+                      child: Column(
+                        children: [
+                          const Text(
+                            'Practice Design & Code',
+                            style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 60,
+                                height: 1.2),
+                          ),
+                          const SizedBox(height: 16),
+                          const Text(
+                            "I'm trying to create an awesome UI apps using my knowledge in Flutter in this app which presents a group of courses ",
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * .2,
+                          ),
+                          AnimationButton(
+                            btnAnimationController: _btnanimationController,
+                            onPressed: () {
+                              _btnanimationController.isActive = true;
+                              Future.delayed(Duration(milliseconds: 800), () {
+                                CustomShowDialog(context, onClosed: (_) {
+                                  setState(() {
+                                    isSignInDialogShown = false;
+                                  });
+                                });
+                                setState(() {
+                                  isSignInDialogShown = true;
+                                });
+                              });
+                            },
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 24),
+                            child: Text(
+                              "Purchase includes access to 20+ courses, 240+ premium tutorials, 120 hours of videos, source files and certificates",
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

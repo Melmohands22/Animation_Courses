@@ -1,15 +1,16 @@
 import 'package:animation/features/onboarding/presentation/views/widgets/sign_in_form.dart';
 import 'package:flutter/material.dart';
 
-Future<Object?> CustomShowDialog(BuildContext context) {
+Future<Object?> CustomShowDialog(BuildContext context,
+    {required ValueChanged onClosed}) {
   return showGeneralDialog(
     barrierDismissible: true,
     barrierLabel: "Sign In",
     context: context,
-    transitionDuration:const Duration(milliseconds: 400),
+    transitionDuration: const Duration(milliseconds: 400),
     transitionBuilder: (_, animation, __, child) {
       Tween<Offset> tween;
-      tween = Tween(begin:const Offset(0, -1), end: Offset.zero);
+      tween = Tween(begin: const Offset(0, -1), end: Offset.zero);
       return SlideTransition(
         position: tween.animate(
             CurvedAnimation(parent: animation, curve: Curves.easeInOut)),
@@ -62,5 +63,5 @@ Future<Object?> CustomShowDialog(BuildContext context) {
         ),
       ),
     ),
-  );
+  ).then(onClosed);
 }
