@@ -1,8 +1,6 @@
-import 'dart:ui';
 import 'package:rive/rive.dart' as rive;
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class AnimationButton extends StatelessWidget {
   final VoidCallback onPressed;
