@@ -1,5 +1,6 @@
 import 'package:animation/core/utilis/rive_utils.dart';
 import 'package:animation/features/home/presentation/views/data/models/rive_assets.dart';
+import 'package:animation/features/home/presentation/views/home_view.dart';
 import 'package:animation/features/home/presentation/views/widgets/animated_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart' as rive;
@@ -18,9 +19,10 @@ class _EntryPointState extends State<EntryPoint> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body:const HomeView(),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.all(12),
-        margin: EdgeInsets.symmetric(horizontal: 24),
+        padding:const EdgeInsets.all(12),
+        margin:const EdgeInsets.symmetric(horizontal: 24),
         decoration: BoxDecoration(
             color: Color(0xff173540).withOpacity(0.8),
             borderRadius: BorderRadius.circular(24)),
