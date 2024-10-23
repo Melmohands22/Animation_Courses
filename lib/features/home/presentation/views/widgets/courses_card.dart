@@ -1,4 +1,4 @@
-import 'package:animation/features/home/presentation/views/home_view.dart';
+import 'package:animation/features/home/presentation/views/widgets/secandry_course_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

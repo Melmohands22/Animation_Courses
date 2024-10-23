@@ -7,7 +7,7 @@ Future<Object?> CustomShowDialog(BuildContext context,
     barrierDismissible: true,
     barrierLabel: "Sign In",
     context: context,
-    transitionDuration: const Duration(milliseconds: 400),
+    transitionDuration: const Duration(milliseconds: 350),
     transitionBuilder: (_, animation, __, child) {
       Tween<Offset> tween;
       tween = Tween(begin: const Offset(0, -1), end: Offset.zero);
@@ -46,7 +46,7 @@ Future<Object?> CustomShowDialog(BuildContext context,
                   ],
                 ),
                 Positioned(
-                  bottom: -54,
+                  bottom: -92,
                   left: (MediaQuery.of(context).size.width - 110) / 2,
                   child: const CircleAvatar(
                     radius: 20,

@@ -3,7 +3,9 @@ import 'package:rive/rive.dart';
 
 class MenuButton extends StatelessWidget {
   const MenuButton({
-    super.key, required this.prees, required this.riveOnInit,
+    super.key,
+    required this.prees,
+    required this.riveOnInit,
   });
   final VoidCallback prees;
   final ValueChanged<Artboard> riveOnInit;
@@ -24,7 +26,10 @@ class MenuButton extends StatelessWidget {
                 BoxShadow(
                     color: Colors.black12, blurRadius: 8, offset: Offset(0, 3)),
               ]),
-              child: RiveAnimation.asset("assets/RiveAssets/menu_button.riv"),
+          child: RiveAnimation.asset(
+            "assets/RiveAssets/menu_button.riv",
+            onInit: riveOnInit,
+          ),
         ),
       )),
     );

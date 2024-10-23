@@ -1,7 +1,7 @@
 import 'package:animation/core/utilis/rive_utils.dart';
 import 'package:animation/features/home/presentation/views/data/models/rive_assets.dart';
 import 'package:animation/features/home/presentation/views/widgets/side_menu_tile.dart';
-import 'package:animation/features/home/presentation/views/widgets/info_card.dart';
+import 'package:animation/features/onboarding/presentation/views/widgets/info_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
@@ -20,7 +20,7 @@ class _SideMenuState extends State<SideMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: MediaQuery.of(context).size.width * (2 / 3),
+        width: 300,
         height: double.infinity,
         color: Color(0xff17203a),
         child: SafeArea(
@@ -32,7 +32,7 @@ class _SideMenuState extends State<SideMenu> {
               profession: 'Flutter developer',
             ),
             Padding(
-                padding:const EdgeInsets.only(left: 24, top: 32, bottom: 16),
+                padding: const EdgeInsets.only(left: 24, top: 32, bottom: 16),
                 child: Text(
                   "browse".toUpperCase(),
                   style: Theme.of(context)
@@ -62,7 +62,7 @@ class _SideMenuState extends State<SideMenu> {
               ),
             ),
             Padding(
-                padding:const EdgeInsets.only(left: 24, top: 32, bottom: 16),
+                padding: const EdgeInsets.only(left: 24, top: 32, bottom: 16),
                 child: Text(
                   "history".toUpperCase(),
                   style: Theme.of(context)
@@ -81,7 +81,7 @@ class _SideMenuState extends State<SideMenu> {
                 },
                 prees: () {
                   menu.input!.change(true);
-                  Future.delayed(const Duration ( seconds: 1), () {
+                  Future.delayed(const Duration(seconds: 1), () {
                     menu.input!.change(false);
                   });
                   setState(() {

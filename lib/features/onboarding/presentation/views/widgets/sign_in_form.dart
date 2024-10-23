@@ -1,7 +1,9 @@
 import 'package:animation/core/utilis/rive_utils.dart';
 import 'package:animation/features/home/presentation/views/widgets/entry_point.dart';
 import 'package:animation/features/onboarding/presentation/views/widgets/custom_divider.dart';
+import 'package:animation/features/onboarding/presentation/views/widgets/custom_positioned.dart';
 import 'package:animation/features/onboarding/presentation/views/widgets/custom_sign_up.dart';
+import 'package:animation/features/onboarding/presentation/views/widgets/custom_text_form_field.dart';
 import 'package:animation/features/onboarding/presentation/views/widgets/sign_up_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -145,93 +147,6 @@ class _SignInFormState extends State<SignInForm> {
               bottomRight: Radius.circular(25),
               topRight: Radius.circular(25),
             ))),
-      ),
-    );
-  }
-}
-
-class CustomPassTextField extends StatelessWidget {
-  const CustomPassTextField({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0, bottom: 16),
-      child: TextFormField(
-        validator: (value) {
-          if (value!.isEmpty) {
-            return "";
-          }
-          return null;
-        },
-        onSaved: (password) {},
-        obscureText: true,
-        decoration: InputDecoration(
-          prefixIcon: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: SvgPicture.asset("assets/icons/password.svg"),
-          ),
-          border: OutlineInputBorder(),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(color: Colors.grey),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomEmailTextField extends StatelessWidget {
-  const CustomEmailTextField({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0, bottom: 16),
-      child: TextFormField(
-        validator: (value) {
-          if (value!.isEmpty) {
-            return "";
-          }
-          return null;
-        },
-        onSaved: (email) {},
-        decoration: InputDecoration(
-          prefixIcon: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: SvgPicture.asset("assets/icons/email.svg"),
-          ),
-          border: OutlineInputBorder(),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(color: Colors.grey),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomPositioned extends StatelessWidget {
-  const CustomPositioned({super.key, required this.child, this.size = 100});
-  final Widget child;
-  final double size;
-  @override
-  Widget build(BuildContext context) {
-    return Positioned.fill(
-      child: Column(
-        children: [
-          const Spacer(),
-          SizedBox(height: size, width: size, child: child),
-          Spacer(
-            flex: 2,
-          ),
-        ],
       ),
     );
   }

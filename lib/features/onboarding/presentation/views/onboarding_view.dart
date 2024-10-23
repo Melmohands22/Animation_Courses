@@ -1,6 +1,6 @@
 import 'package:animation/features/onboarding/presentation/views/widgets/animation_button.dart';
 import 'package:animation/features/onboarding/presentation/views/widgets/background_section.dart';
-import 'package:animation/features/onboarding/presentation/views/widgets/custom_show_dailog.dart';
+import 'package:animation/features/onboarding/presentation/views/custom_show_dailog.dart';
 import 'package:animation/features/onboarding/presentation/views/widgets/higher_section.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart' as rive;
@@ -37,7 +37,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         children: [
           const BackgroundSection(),
           AnimatedPositioned(
-            top: isSignInDialogShown ? -50 : 0,
+            top: isSignInDialogShown ? -80 : 0,
             duration: Duration(milliseconds: 240),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
