@@ -1,6 +1,8 @@
-import 'package:animation/features/home/presentation/views/widgets/entry_point.dart';
-import 'package:animation/features/onboarding/presentation/views/onboarding_view.dart';
+import 'package:animation/features/home/presentation/views/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
+
+import 'features/home/presentation/views/widgets/entry_point.dart';
+import 'features/onboarding/presentation/views/onboarding_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
        EntryPoint.id: (context)=>EntryPoint(),
      }
       ,
-      home: OnboardingView(),
+      home: SideMenu(),
     );
   }
 }
