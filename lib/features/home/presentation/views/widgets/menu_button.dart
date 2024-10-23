@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
-class MenuBtn extends StatelessWidget {
-  const MenuBtn({
+class MenuButton extends StatelessWidget {
+  const MenuButton({
     super.key, required this.prees, required this.riveOnInit,
   });
   final VoidCallback prees;

@@ -1,4 +1,3 @@
-import 'package:animation/features/home/presentation/views/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 
 import 'features/home/presentation/views/widgets/entry_point.dart';
@@ -16,12 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes:
-     {
-       EntryPoint.id: (context)=>EntryPoint(),
-     }
-      ,
-      home: SideMenu(),
+      routes: {
+        EntryPoint.id: (context) => EntryPoint(),
+      },
+      home: EntryPoint(),
     );
   }
 }
